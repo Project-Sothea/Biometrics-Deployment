@@ -1,0 +1,39 @@
+name: sothea-biometrics
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: sothea
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - '5432:5432'
+    command: postgres -c listen_addresses='*'
+    volumes:
+      - postgres-data:/var/lib/postgresql
+      - ./sql:/docker-entrypoint-initdb.d:z
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d sothea']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: sothea-biometrics-backend:latest
+    ports:
+      - ${BACKEND_PORT:-3333}:3000
+    environment:
+      PORT: 3000
+      SECRET_KEY: ${SECRET_KEY:-aedbfcbbaffa2a82eff7b2bcac561afb}
+      DATABASE_URL: postgres://postgres:postgres123@postgres:5432/sothea
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    image: sothea-biometrics-frontend:latest
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+
+volumes:
+  postgres-data:
