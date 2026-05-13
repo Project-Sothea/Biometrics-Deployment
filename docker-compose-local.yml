@@ -19,7 +19,8 @@ services:
       retries: 5
 
   backend:
-    image: sothea-biometrics-backend:latest
+    build:
+      context: ../Sothea-Backend
     ports:
       - ${BACKEND_PORT:-3333}:3000
     environment:
@@ -32,7 +33,10 @@ services:
         condition: service_healthy
 
   frontend:
-    image: sothea-biometrics-frontend:latest
+    build:
+      context: ../Sothea-Frontend
+      args:
+        VITE_API_URL: ${API_URL:-http://localhost:3001/api}
     ports:
       - "${FRONTEND_PORT:-3000}:80"
 
