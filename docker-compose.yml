@@ -27,9 +27,12 @@ services:
       SECRET_KEY: ${SECRET_KEY:-aedbfcbbaffa2a82eff7b2bcac561afb}
       DATABASE_URL: postgres://postgres:postgres123@postgres:5432/sothea
       TIMEZONE: Asia/Phnom_Penh
+      MEDIA_ROOT: /media
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./uploads:/media:rw
 
   frontend:
     image: sothea-biometrics-frontend:latest
