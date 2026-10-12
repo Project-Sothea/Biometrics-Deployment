@@ -5,7 +5,7 @@ Description=Biometrics Backend
 Pod=biometrics.pod
 Image=localhost/backend:latest
 Volume=/home/biometrics/uploads:/media:Z
-Environment=PORT=3001
+Environment=PORT=3000
 Environment=DATABASE_URL=postgresql://biometrics@host.containers.internal:5432/biometrics
 Environment=TIMEZONE=Asia/Phnom_Penh
 Environment=MEDIA_ROOT=/media

@@ -21,8 +21,6 @@ services:
   backend:
     build:
       context: ../Sothea-Backend
-    ports:
-      - ${BACKEND_PORT:-3333}:3000
     environment:
       PORT: 3000
       SECRET_KEY: ${SECRET_KEY:-aedbfcbbaffa2a82eff7b2bcac561afb}
@@ -40,27 +38,16 @@ services:
       context: ../Sothea-Frontend
       args:
         VITE_API_URL: ${API_URL:-http://localhost:3001/api}
+    environment:
+      BACKEND_HOST: http://backend:3000
     ports:
       - "${FRONTEND_PORT:-3000}:80"
-
-  nginx:
-    image: nginx:1.31.6-alpine
-    ports:
-      - "8000:80"
-    environment:
-      - FRONTEND_HOST=http://frontend:80
-      - BACKEND_HOST=http://backend:3000
-    depends_on:
-      - backend
-      - frontend
-    volumes:
-      - ./nginx.conf:/etc/nginx/templates/default.conf.template
 
   cloudflared:
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run
     depends_on:
-      - nginx
+      - frontend
     environment:
       TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
 

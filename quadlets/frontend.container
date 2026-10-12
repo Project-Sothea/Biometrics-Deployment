@@ -5,7 +5,7 @@ Description=Biometrics Frontend
 Pod=biometrics.pod
 Image=localhost/frontend:latest
 Volume=/home/biometrics/uploads:/media:Z
-Environment=VITE_API_URL=/api
+Environment=BACKEND_HOST=http://localhost:3000
 Pull=never
 
 [Service]
