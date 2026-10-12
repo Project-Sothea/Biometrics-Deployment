@@ -1,12 +1,11 @@
 [Unit]
 Description=Biometrics Frontend
-DependsOn=backend.container
+Requires=backend.container
 After=backend.container
 
 [Container]
 Pod=biometrics.pod
 Image=localhost/frontend:latest
-Volume=/home/biometrics/uploads:/media:Z
 Environment=BACKEND_HOST=http://localhost:3000
 Pull=never
 
