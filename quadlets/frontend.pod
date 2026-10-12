@@ -1,0 +1,16 @@
+[Unit]
+Description=Biometrics Frontend
+
+[Container]
+Pod=biometrics.pod
+Image=
+Volume=/home/biometrics/uploads:/media:Z
+Environment=VITE_API_URL=/api
+Pull=never
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

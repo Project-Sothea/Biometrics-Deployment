@@ -1,0 +1,5 @@
+[Pod]
+PublishPort=80:80
+
+[Install]
+WantedBy=default.target

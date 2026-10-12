@@ -58,7 +58,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    command: tunnel run
+    command: tunnel --no-autoupdate run
     depends_on:
       - nginx
     environment:

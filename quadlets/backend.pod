@@ -1,0 +1,22 @@
+[Unit]
+Description=Biometrics Backend
+
+[Container]
+Pod=biometrics.pod
+Image=
+Volume=/home/biometrics/uploads:/media:Z
+Environment=PORT=3001
+Environment=DATABASE_URL=postgresql://biometrics@host.containers.internal:5432/biometrics
+Environment=TIMEZONE=Asia/Phnom_Penh
+Environment=MEDIA_ROOT=/media
+Pull=never
+
+Secret=secret_key,type=env,target=SECRET_KEY
+
+[Service]
+TimeoutStartSec=300
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
