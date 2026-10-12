@@ -3,7 +3,7 @@ Description=Biometrics Backend
 
 [Container]
 Pod=biometrics.pod
-Image=
+Image=localhost/backend:latest
 Volume=/home/biometrics/uploads:/media:Z
 Environment=PORT=3001
 Environment=DATABASE_URL=postgresql://biometrics@host.containers.internal:5432/biometrics

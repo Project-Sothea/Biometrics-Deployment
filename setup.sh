@@ -19,14 +19,14 @@ if ! systemctl is-active --quiet postgresql.service; then
     exit 1
 fi
 
-if ! PGCONNECT_TIMEOUT=5 psql -X -h 127.0.0.1 -U biometrics -d biometrics -w -v ON_ERROR_STOP=1 -c 'SELECT 1;'; then
-    echo "PostgreSQL connection or authentication failed."
+if ! PGCONNECT_TIMEOUT=5 psql -X -h 127.0.0.1 -U biometrics -d biometrics -w -v ON_ERROR_STOP=1 -c 'SELECT 1;' >/dev/null 2>&1; then
+    echo "PostgreSQL connection or authentication failed." >&2
     exit 1
 fi
 
 # Check SSH connection to GitHub
 exit_code=0
-ssh_output=$(ssh -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1) || exit_code=$?
+ssh_output=$(ssh -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1) || exit_code=$?
 
 git_username=$(printf '%s\n' "$ssh_output" | sed -n 's/^Hi \([^!]*\)!.*/\1/p')
 

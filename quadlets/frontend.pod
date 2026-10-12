@@ -3,7 +3,7 @@ Description=Biometrics Frontend
 
 [Container]
 Pod=biometrics.pod
-Image=
+Image=localhost/frontend:latest
 Volume=/home/biometrics/uploads:/media:Z
 Environment=VITE_API_URL=/api
 Pull=never
