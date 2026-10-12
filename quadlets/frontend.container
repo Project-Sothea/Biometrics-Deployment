@@ -1,5 +1,7 @@
 [Unit]
 Description=Biometrics Frontend
+DependsOn=backend.container
+After=backend.container
 
 [Container]
 Pod=biometrics.pod
