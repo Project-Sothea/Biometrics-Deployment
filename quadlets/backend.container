@@ -13,6 +13,8 @@ Environment=FLASK_DEBUG=0
 Environment=GIN_MODE=release
 Pull=never
 
+Secret=secret_key,type=env,target=SECRET_KEY
+
 [Service]
 TimeoutStartSec=300
 Restart=on-failure
