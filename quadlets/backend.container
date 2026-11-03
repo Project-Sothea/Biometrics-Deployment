@@ -4,7 +4,7 @@ Description=Biometrics Backend
 [Container]
 Pod=biometrics.pod
 Image=localhost/backend:latest
-Volume=/home/biometrics/uploads:/media:Z
+Volume=/home/biometrics/uploads:/media:Z,U
 Environment=PORT=3000
 Environment=DATABASE_URL=postgresql://biometrics@host.containers.internal:5432/biometrics
 Environment=TIMEZONE=Asia/Phnom_Penh
@@ -12,8 +12,6 @@ Environment=MEDIA_ROOT=/media
 Environment=FLASK_DEBUG=0
 Environment=GIN_MODE=release
 Pull=never
-
-Secret=secret_key,type=env,target=SECRET_KEY
 
 [Service]
 TimeoutStartSec=300
