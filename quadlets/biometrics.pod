@@ -1,5 +1,6 @@
 [Pod]
 PublishPort=80:80
+PublishPort=4443:443
 
 [Install]
 WantedBy=default.target
