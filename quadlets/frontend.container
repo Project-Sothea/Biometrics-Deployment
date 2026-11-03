@@ -7,6 +7,8 @@ After=backend.container
 Pod=biometrics.pod
 Image=localhost/frontend:latest
 Environment=BACKEND_HOST=http://localhost:3000
+Environment=SITE_HOST=192.168.1.0
+Environment=SITE_HOST_ALT=sothea.local
 Pull=never
 
 [Service]

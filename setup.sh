@@ -68,7 +68,7 @@ if [ -e "$quadlet_path" ] && [ ! -L "$quadlet_path" ]; then
     exit 1
 fi
 
-ln -sfnT "$HOME/deployment/quadlets" "$quadlet_path"
+ln -sfT "$HOME/deployment/quadlets" "$quadlet_path"
 
 systemctl --user daemon-reload
 systemctl --user restart biometrics-pod.service
